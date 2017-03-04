@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Report of {{ total["qqnum"] }}</title>
+        <meta chartset="utf-8">
+        <script src="{{ url_for('static', filename='echarts.simple.min.js') }}"></script>
+    </head>
+    <body>
+        你的QQ号码是：<strong>{{ total["qqnum"] }}</strong><br />
+        QQ动态总数为：<strong>{{ total["mood_count"] }}</strong><br />
+        <br />
+        第一条动态发表于：{{ total["first_mood"][0] }}年{{ total["first_mood"][1] }}月{{ total["first_mood"][2] }}日<br />
+        最后一条动态发表于：{{ total["last_mood"][0] }}年{{ total["last_mood"][1] }}月{{ total["last_mood"][2] }}日
+        
+        <div id="year" style="width: 800px; height: 400px;"></div>
+        <div id="month" style="width: 800px; height: 400px;"></div>
+
+        <script type="text/javascript">
+        function show_pic(mdata, mtime) {
+            var myChart = echarts.init(document.getElementById(mtime));
+            var xa = new Array()
+            var ya = new Array()
+
+            for ( var key in mdata) {
+                xa.push(key)
+                ya.push(mdata[key])
+            }
+
+            var option = {
+                title: {
+                    text: '{{ total["qqnum"] }}',
+                },
+                tooltip: {},
+                legend: {
+                    data: ["动态数量"]
+                },
+                xAxis: {
+                    data: xa
+                },
+                yAxis: {},
+                series: [
+                    {
+                        name: '数量',
+                        type: 'bar',
+                        data: ya,
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top',
+                            }
+                        }
+                    }
+                ]
+            };
+            myChart.setOption(option);
+        }
+        month_data = {{ total["month_total"] }}
+        year_data = {{ total["year_total"] }}
+        show_pic(month_data, 'month');
+        show_pic(year_data, 'year');
+        </script>
+    </body>
+</html>
