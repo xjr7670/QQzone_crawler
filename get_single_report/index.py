@@ -25,6 +25,10 @@ from flask import render_template
 app = Flask(__name__)
 engine = create_engine('sqlite:///../moods.sqlite')
 
+@app.route('/')
+def hello():
+    return "Welcome!"
+
 @app.route('/qqnum=<qqnum>')
 def index(qqnum = None):
     
@@ -68,4 +72,4 @@ def index(qqnum = None):
 
 if __name__ == "__main__":
     app.debug = True
-    app.run()
+    app.run(host='0.0.0.0')
