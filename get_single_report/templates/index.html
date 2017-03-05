@@ -3,7 +3,7 @@
     <head>
         <title>Report of {{ total["qqnum"] }}</title>
         <meta chartset="utf-8">
-        <script src="{{ url_for('static', filename='echarts.simple.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='echarts.common.min.js') }}"></script>
     </head>
     <body style="width: 800px">
         你的QQ号码是：<strong>{{ total["qqnum"] }}</strong><br />
@@ -18,53 +18,54 @@
         <h3>按月划分，每月发表数量为：</h3>
         <div id="month" style="width: 600px; height: 400px;"></div>
         <h3>一星期内每天的发表数量为：</h3>
-        <div id="day" style="width: 600px; height: 400px;"></div>
+        <div id="wday" style="width: 600px; height: 400px;"></div>
 
         <script type="text/javascript">
-        function show_pic(mdata, mtime) {
-            var myChart = echarts.init(document.getElementById(mtime));
-            var xa = new Array()
-            var ya = new Array()
+            function show_pic(mdata, mtime) {
+                var myChart = echarts.init(document.getElementById(mtime));
+                var xa = new Array()
+                var ya = new Array()
 
-            for ( var key in mdata) {
-                xa.push(key)
-                ya.push(mdata[key])
-            }
+                for ( var key in mdata) {
+                    xa.push(key)
+                    ya.push(mdata[key])
+                }
 
-            var option = {
-                title: {
-                    text: '{{ total["qqnum"] }}',
-                },
-                tooltip: {},
-                legend: {
-                    data: ["动态数量"]
-                },
-                xAxis: {
-                    data: xa
-                },
-                yAxis: {},
-                series: [
-                    {
-                        name: '数量',
-                        type: 'bar',
-                        data: ya,
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'top',
+                var option = {
+                    title: {
+                        text: mtime + ' report of ' + '{{ total["qqnum"] }}',
+                        left: 150
+                    },
+                    tooltip: {},
+                    legend: {
+                        data: ["动态数量"]
+                    },
+                    xAxis: {
+                        data: xa
+                    },
+                    yAxis: {},
+                    series: [
+                        {
+                            name: '数量',
+                            type: 'bar',
+                            data: ya,
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'top',
+                                }
                             }
                         }
-                    }
-                ]
-            };
-            myChart.setOption(option);
-        }
-        month_data = {{ total["month_total"] }}
-        year_data = {{ total["year_total"] }}
-        wday_data = {{ total["wday_total"] }}
-        show_pic(month_data, 'month');
-        show_pic(year_data, 'year');
-        show_pic(wday_data, 'day');
+                    ]
+                };
+                myChart.setOption(option);
+            }
+            month_data = {{ total["month_total"] }}
+            year_data = {{ total["year_total"] }}
+            wday_data = {{ total["wday_total"] }}
+            show_pic(month_data, 'month');
+            show_pic(year_data, 'year');
+            show_pic(wday_data, 'wday');
         </script>
     </body>
 </html>
