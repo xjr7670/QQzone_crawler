@@ -15,8 +15,8 @@ def get_cookie():
 cookie = get_cookie()
 
 headers = {'host': 'h5.qzone.qq.com',
-            'User-Agent': 'Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:48.0) Gecko/20100101 Firefox/48.0',
-            'Accept': '*/*',
+            'User-Agent': 'Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:51.0) Gecko/20100101 Firefox/51.0',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'Accept-Language': 'zh,zh-CN;q=0.8,en-US;q=0.5,en;q=0.3',
             'Accept-Encoding': 'gzip, deflate, br',
             'Cookie': cookie,
@@ -67,9 +67,9 @@ def parse_friends_url():
     '''
 
     cookie = headers['Cookie']
-    qq_start = cookie.find('o_cookie=')
+    qq_start = cookie.find('ptui_loginuin')
     qq_end = cookie.find(';', qq_start)
-    qqnumber = cookie[qq_start+9 : qq_end]
+    qqnumber = cookie[qq_start+14 : qq_end]
     params = {"uin": qqnumber,
               "fupdate": 1,
               "action": 1,
