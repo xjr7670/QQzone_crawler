@@ -15,8 +15,8 @@ class Get_friends_number(object):
         util.check_path('friends')
         print('Start to get friends list and save it for ./friends folder')
 
-
     def get_friends(self):
+
         key = True
         position = 0
         while key:
@@ -34,9 +34,14 @@ class Get_friends_number(object):
             # if that, the uinlist is void list
             with open('friends/offset' + str(position) + '.json') as f2:
                 con = f2.read()
+            if "请先登录" in con:
+                print("登录失败，请检查原因")
+                key = False
+                break
             if '''"uinlist":[]''' in con:
                 print("Get friends Finish")
                 break
+                key = False
 
             position += 50
             sleep(5)
