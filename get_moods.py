@@ -33,6 +33,7 @@ class Get_moods(object):
         while key:
             print("\tDealing with position:\t%d" % pos)
             url = url_base + "&pos=%d" % pos
+            print(url)
             res = self.session.get(url, headers = self.headers)
             con = res.text
             with open('mood_result/' + qqnumber + '/' + str(pos), 'w') as f:
