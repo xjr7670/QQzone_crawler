@@ -15,7 +15,7 @@ def get_cookie():
 cookie = get_cookie()
 
 headers = {'host': 'h5.qzone.qq.com',
-            'User-Agent': 'Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:51.0) Gecko/20100101 Firefox/51.0',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36',
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'Accept-Language': 'zh,zh-CN;q=0.8,en-US;q=0.5,en;q=0.3',
             'Accept-Encoding': 'gzip, deflate, br',
@@ -67,15 +67,18 @@ def parse_friends_url():
     '''
 
     cookie = headers['Cookie']
-    qq_start = cookie.find('ptui_loginuin')
+    qq_start = cookie.find('uin=o')
     qq_end = cookie.find(';', qq_start)
-    qqnumber = cookie[qq_start+14 : qq_end]
+    qqnumber = cookie[qq_start+5 : qq_end]
+    if qqnumber[0] == 0:
+        qqnumber = qqnumber[1:]
     params = {"uin": qqnumber,
               "fupdate": 1,
               "action": 1,
               "g_tk": g_tk}
 
     host = "https://h5.qzone.qq.com/proxy/domain/base.qzone.qq.com/cgi-bin/right/get_entryuinlist.cgi?"
+    #https://h5.qzone.qq.com/proxy/domain/base.qzone.qq.com/cgi-bin/right/get_entryuinlist.cgi?uin=284182470&fupdate=1&action=1&offset=200&g_tk=1350570173&qzonetoken=8114052f3d145601114b9b3f8caad4ad2853b418b9c345f42af296d6d3e2c980b592a1b7c52273aaa0
     url = host + parse.urlencode(params)
 
     return url
