@@ -26,7 +26,20 @@ QQ 空间动态爬虫，利用cookie登录获取所有可访问好友空间的�
 
 ---
 
-**get_moods_detail.py**：程序在执行完get_moods.py中的功能之后，会把包含有每个好友的说说文件保存到本地。而这个程序就是用于把说说信息从这些文件里面提取出来，放到sqlite数据库里面去的。这个程序需要单独执行。执行完后在当前目录下会生成moods.sqlite数据库文件。
+**operate_table.py**：这个程序创建用于保存说说信息的数据库。里面写了创建数据表和删除数据表的两个函数。需要单独执行。
+创建数据表：
+
+```
+python operate_table.py create_table
+```
+
+删除数据表：
+
+```
+python operate_table.py drop_table
+```
+
+**get_moods_detail.py**：程序在执行完get_moods.py中的功能之后，会把包含有每个好友的说说文件保存到本地。而这个程序就是用于把说说信息从这些文件里面提取出来，放到sqlite数据库里面去的。这个程序需要单独执行。执行完后在当前目录下会生成moods.sqlite数据库文件。本程序需要在成功执行operate_table.py程序创建数据表后执行。
 
 **get_single_report**：这个是个Web程序，用于在浏览器中查看指定好友说说的简单报告。也需要单独执行，并且必须要在执行完get_moods_details.py文件以生成moods.sqlite数据库文件，这个web程序才可以正确执行。直接执行本文件夹中的index.py即可。需要先安装flask、pandas、sqlalchemy这3个库。执行index.py后，在浏览器中输入 http://localhost/qqnum=QQ号码 就可以查看到结果了
 
