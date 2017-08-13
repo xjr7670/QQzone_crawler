@@ -67,7 +67,6 @@ class Get_detail(object):
                     # when the mood only has a video
                     mood_item['content'] = mood['video'][0]['url3']
 
-            #print("%d\t%s\t%s\t%d\t%s\t%s\t%s" % (self.count, mood_item['content'][:10], mood_item['create_time'], mood_item['comment_num'], mood_item['phone'], mood_item['pic'][:10], mood_item['locate'][:10]))
             print('Dealing with %d' % self.count)
             self.insert_to_db(mood_item)
             self.count += 1
