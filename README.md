@@ -24,6 +24,12 @@ QQ 空间动态爬虫，利用cookie登录获取所有可访问好友空间的�
 
 **cookie_file**： 用于放置自己登录QQ空间后得到的cookie。从浏览器中复制出来，默认是会分行的，不用管它，在负责处理cookie的函数中已有对应的处理代码。但由于我是在Linux下利用替换的方式替换掉换行符，所以如果在windows下运行，可能还需要在这里处理一下。**但要注意的是，这个文件里面只能放一个cookie。它的作用是方便设置cookie，而不是用于反反爬虫。**
 
+---
+
+**get_moods_detail.py**：程序在执行完get_moods.py中的功能之后，会把包含有每个好友的说说文件保存到本地。而这个程序就是用于把说说信息从这些文件里面提取出来，放到sqlite数据库里面去的。这个程序需要单独执行。执行完后在当前目录下会生成moods.sqlite数据库文件。
+
+**get_single_report**：这个是个Web程序，用于在浏览器中查看指定好友说说的简单报告。也需要单独执行，并且必须要在执行完get_moods_details.py文件以生成moods.sqlite数据库文件，这个web程序才可以正确执行。直接执行本文件夹中的index.py即可。需要先安装flask、pandas、sqlalchemy这3个库。执行index.py后，在浏览器中输入 http://localhost/qqnum=QQ号码 就可以查看到结果了
+
 ## <font color="red">注意事项</font>
 
 1. **获取QQ好友信息是间接获取的。需要先在QQ空间中将自己空间的访问权限先设置为仅QQ好友可访问。然后程序才能够正常运行**
