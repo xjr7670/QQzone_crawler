@@ -48,3 +48,6 @@ python operate_table.py drop_table
 1. **获取QQ好友信息是间接获取的。需要先在QQ空间中将自己空间的访问权限先设置为仅QQ好友可访问。然后程序才能够正常运行**
 
 2. 最终获取到的各好友的空间动态会以文件形式保存在以其QQ号为名的文件夹当中（它们又位于mood\_result文件夹中）。它们是由QQ空间服务器返回的文件，还需要自行进行处理才能得到自己想要的信息。其实内容的格式已经很接近JSON了
+2.1 更新后的版本，可以通过依次执行operate_table.py、get_moods_detail.py两个程序来把动态保存在sqlite数据库文件中
+
+3. 在get_moods_detail.py程序中，我只提取了当时所需要的部分信息，而不是与说说相关的所有信息。有需要其它信息的还要自己去operate_table.py中修改创建数据表的函数以及在get_moods_detail.py程序中修改提取说说信息的函数
