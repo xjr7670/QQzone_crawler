@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 
 import get_my_friends
 import get_moods
