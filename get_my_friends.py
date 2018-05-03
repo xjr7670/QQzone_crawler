@@ -1,7 +1,10 @@
+#!/usr/bin/env python3
+#-*- coding:utf-8 -*-
 
 import requests
 from time import sleep
 import util
+
 
 class Get_friends_number(object):
     '''Use to get one's friends from their qzone's entry list'''
