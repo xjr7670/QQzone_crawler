@@ -5,10 +5,8 @@ QQ 空间动态爬虫，利用cookie登录获取所有可访问好友空间的�
 本程序使用的是**python3.5**，在**Linux**下完成。由于自己的电脑上同时有python2.7和python3.5，默认是python2。所以在每个程序头部我写的都是
 
 ```
-#/usr/bin/env python3
+#!/usr/bin/env python3
 ```
-
-配置不一样的朋友需要自己稍做修改。
 
 由于程序使用`from urllib import parse`，利用parse模块来构造URL，所以如果使用python2的朋友需要在对应的地方修改，此外print语句也是要相应修改的。
 
