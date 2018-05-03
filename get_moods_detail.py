@@ -1,8 +1,11 @@
+#!/usr/bin/env python
+#-*- coding:utf-8 -*-
 
 import os
 import json
 import sqlite3
 import html
+
 
 class Get_detail(object):
     ''' Get moods detail information and save it to database'''
