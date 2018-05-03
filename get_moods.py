@@ -1,9 +1,12 @@
+#!/usr/bin/env python
+#-*- coding:utf-8 -*-
 
 import requests
 import os
 import sys
 import time
 import util
+
 
 class Get_moods(object):
     '''Get moods file with cookie'''
