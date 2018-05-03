@@ -1,6 +1,13 @@
+#!/usr/bin/env python3
+#-*- coding:utf-8 -*-
+
+'''
+用到的工具函数、变量集合
+'''
 
 from urllib import parse
 import os
+
 
 def get_cookie():
     '''Get cookie from cookie_file'''
@@ -76,7 +83,6 @@ def parse_friends_url():
               "g_tk": g_tk}
 
     host = "https://h5.qzone.qq.com/proxy/domain/base.qzone.qq.com/cgi-bin/right/get_entryuinlist.cgi?"
-    #https://h5.qzone.qq.com/proxy/domain/base.qzone.qq.com/cgi-bin/right/get_entryuinlist.cgi?uin=284182470&fupdate=1&action=1&offset=200&g_tk=1350570173&qzonetoken=8114052f3d145601114b9b3f8caad4ad2853b418b9c345f42af296d6d3e2c980b592a1b7c52273aaa0
     url = host + parse.urlencode(params)
 
     return url
