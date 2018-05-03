@@ -1,6 +1,19 @@
+#!/usr/bin/env python3
+#-*- coding:utf-8 -*-
+
+'''
+本文件用于创建和删除sqlite数据表
+方便保存QQ动态数据
+
+使用方法：
+在shell下
+创建表： python3 operate_table.py create_table
+删除表： python3 operate_table.py drop_table
+'''
 
 import sqlite3
 import sys
+
 
 class Operate_table(object):
 
