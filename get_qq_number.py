@@ -1,6 +1,9 @@
+#!/usr/bin/env python3
+#-*- coding:utf-8 -*-
 
 import json
 import os
+
 
 class exact_data_from_result(object):
     '''Define method to get my qq friends data from result
