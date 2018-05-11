@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 #-*- coding:utf-8 -*-
 
+"""
+获取自己的QQ好友列表
+"""
+
+
 import requests
 from time import sleep
 import util
@@ -14,7 +19,7 @@ class Get_friends_number(object):
         self.headers = util.headers
         self.base_url = util.parse_friends_url()
         util.check_path('friends')
-        print('Start to get friends list and save it for ./friends folder')
+        print('开始获取好友列表，并把文件保存到 friends 文件夹')
 
     def get_friends(self):
 
@@ -28,19 +33,19 @@ class Get_friends_number(object):
             print("\tDealing with position\t%d." % position)
             res = requests.get(url, headers=self.headers)
             html = res.text
-            with open('friends/offset' + str(position) + '.json', 'w') as f:
+            with open('friends/offset' + str(position) + '.json', 'w', encoding='utf-8') as f:
                 f.write(html)
 
             # check whether the friend list is over
             # if that, the uinlist is void list
-            with open('friends/offset' + str(position) + '.json') as f2:
+            with open('friends/offset' + str(position) + '.json', encoding='utf-8') as f2:
                 con = f2.read()
             if "请先登录" in con:
                 print("登录失败，请检查原因")
                 key = False
                 break
             if '''"uinlist":[]''' in con:
-                print("Get friends Finish")
+                print("好友列表获取完毕!")
                 break
                 key = False
 
