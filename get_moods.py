@@ -1,6 +1,11 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
 
+"""
+把包含动态的文件下载下来
+"""
+
+
 import requests
 import os
 import sys
@@ -34,10 +39,10 @@ class Get_moods(object):
         while key:
             print("\tDealing with position:\t%d" % pos)
             url = url_base + "&pos=%d" % pos
-            print(url)
+            # print(url)   # for debug use
             res = self.session.get(url, headers = self.headers)
             con = res.text
-            with open('mood_result/' + qqnumber + '/' + str(pos), 'w') as f:
+            with open('mood_result/' + qqnumber + '/' + str(pos), 'w', encoding="utf-8") as f:
                 f.write(con)
 
             if '''"msglist":null''' in con:
@@ -45,13 +50,13 @@ class Get_moods(object):
 
             # Cannot access...
             if '''"msgnum":0''' in con:
-                with open('crawler_log.log', 'a') as log_file:
+                with open('crawler_log.log', 'a', encoding="utf-8") as log_file:
                     log_file.write("%s Cannot access..\n" % qqnumber)
                 key = False
 
             # Cookie expried
             if '''"subcode":-4001''' in con:
-                with open('crawler_log.log', 'a') as log_file:
+                with open('crawler_log.log', 'a', encoding="utf-8") as log_file:
                     log_file.write('Cookie Expried! Time is %s\n' % time.ctime())
                 sys.exit()
 
@@ -85,7 +90,7 @@ class Get_moods_start(object):
         app = Get_moods()
         #app.get_rest_number()
 
-        with open('qqnumber.inc') as qnumber_file:
+        with open('qqnumber.inc', encoding="utf-8") as qnumber_file:
             qnumber_string = qnumber_file.read()
         qnumber_list = eval(qnumber_string)
 
@@ -100,7 +105,7 @@ class Get_moods_start(object):
             print("Dealing with:\t%s" % qq)
 
             start_time = time.ctime()
-            with open('crawler_log.log', 'a') as log_file:
+            with open('crawler_log.log', 'a', encoding="utf-8") as log_file:
                 log_file.write("Program run at: %s\tGetting %s data...\n" % (start_time, qq))
 
             try:
@@ -110,11 +115,11 @@ class Get_moods_start(object):
                 sys.exit()
             except Exception as e:
                 # Write the rest item back to qqnumber.inc
-                with open('qqnumber.inc', 'w') as qnumber_file:
+                with open('qqnumber.inc', 'w', encoding="utf-8") as qnumber_file:
                     qnumber_file.write(str(save_back_qnumber))
 
                 # Write the log
-                with open('crawler_log.log', 'a') as log_file:
+                with open('crawler_log.log', 'a', encoding="utf-8") as log_file:
                     exception_time = time.ctime()
                     log_file.write("Exception occured: %s\n%s\n" % (exception_time, e))
             else:
