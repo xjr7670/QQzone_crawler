@@ -77,7 +77,7 @@ class Get_detail(object):
                     # when the mood only has a video
                     mood_item['content'] = mood['video'][0]['url3']
 
-            print('Dealing with %d' % self.count)
+            print('Dealing with QQ: %s, total moods count: %d' % (qqnumber, self.count))
             self.insert_to_db(mood_item)
             self.count += 1
             if self.count % 1000 == 0:
