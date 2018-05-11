@@ -39,4 +39,11 @@ class Operate_table(object):
 if __name__ == '__main__':
     app = Operate_table()
     argv = sys.argv[1]
-    eval("app.%s()" % argv)
+    
+    if argv == 'create_table':
+        app.create_table()
+    elif argv == 'drop_table':
+        app.drop_table()
+    else:
+        print("输入参数必须为create_table或drop_table其中之一")
+        raise ValueError
