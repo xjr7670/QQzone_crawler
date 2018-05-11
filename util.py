@@ -5,8 +5,10 @@
 用到的工具函数、变量集合
 '''
 
-from urllib import parse
 import os
+import re
+from urllib import parse
+import requests
 
 
 def get_cookie():
@@ -43,6 +45,16 @@ def get_g_tk():
 
 g_tk = get_g_tk()
 
+
+def get_qzonetoken(qqnum):
+    '''获取qzonetoken，它位于空间首页的源代码中'''
+    index_url = "https://user.qzone.qq.com/%s" % qqnum
+    res = requests.get(index_url, headers=headers)
+    src = res.text
+    search_res = re.search(r'g_qzonetoken.*"(.*)";}', src, re.S)
+    return search_res.group(1) if search_res else ''
+
+
 def parse_moods_url(qqnum):
     '''This method use to get every friend's mood cgi url
        So it needs the friend's qqnumber to get their url
@@ -77,10 +89,13 @@ def parse_friends_url():
     qqnumber = cookie[qq_start+5 : qq_end]
     if qqnumber[0] == 0:
         qqnumber = qqnumber[1:]
+    # 先获取qzonetoken
+    qzonetoken = get_qzonetoken(qqnumber)
     params = {"uin": qqnumber,
               "fupdate": 1,
               "action": 1,
-              "g_tk": g_tk}
+              "g_tk": g_tk,
+              "qzonetoken": qzonetoken}
 
     host = "https://h5.qzone.qq.com/proxy/domain/base.qzone.qq.com/cgi-bin/right/get_entryuinlist.cgi?"
     url = host + parse.urlencode(params)
