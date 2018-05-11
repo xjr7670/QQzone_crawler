@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 #-*- coding:utf-8 -*-
 
+"""
+从上一步获取到的QQ列表文件夹中，提取出QQ号，并保存到qqnumber.inc文件中
+"""
+
 import json
 import os
 
@@ -19,7 +23,7 @@ class exact_data_from_result(object):
         qqnumber_item = []
         i = 0
         for each_file in friendsFiles:
-            with open('friends/' + each_file) as f:
+            with open('friends/' + each_file, encoding='utf-8') as f:
                 source = f.read()
                 con_dict = source[75:-4].replace('\n', '')
                 con_json = json.loads(con_dict)
@@ -30,5 +34,5 @@ class exact_data_from_result(object):
                     i = i + 1
                     qqnumber_item.append(item)
         else:
-            with open('qqnumber.inc', 'w') as qqfile:
+            with open('qqnumber.inc', 'w', encoding='utf-8') as qqfile:
                 qqfile.write(str(qqnumber_item))
