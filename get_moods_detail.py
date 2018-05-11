@@ -1,6 +1,15 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
 
+"""
+获取动态详情
+
+包含3个方法：
+  make_dict -- 用于临时保存每个QQ的动态信息，QQ号为键，值为这个QQ号的所有动态的文件列表
+  exact_mood_data -- 主要的功能函数，把动态信息从文件里提取出来，并调用insert_to_db方法插入到sqlite数据库中
+  insert_to_db -- 供exact_mood_data调用，把数据插入到sqlite数据库中
+"""
+
 import os
 import json
 import sqlite3
@@ -30,7 +39,7 @@ class Get_detail(object):
 
         qqnumber = qq
         filename = fname
-        with open(filename) as f:
+        with open(filename, encoding="utf-8") as f:
             con = f.read()
         con_dict = json.loads(con[10:-2])
         try:
@@ -55,8 +64,8 @@ class Get_detail(object):
                 # if the mood only has pic but no other thing
                 mood_item['content'] = mood_item['pic']
             if mood_item['content'] == '' and 'rt_con' in mood:
-                # if the mood is a forward video
-                # it will be in the mood['rt_con']
+                # 如果动态内容是一个转发的视频
+                # 它会被保存在mood['rt_con']中
                 try:
                     mood_item['content'] = mood['rt_con']['conlist'][0]['con']
                 except IndexError:
