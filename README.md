@@ -49,3 +49,5 @@ python3 operate_table.py drop_table
 2.1 更新后的版本，可以通过依次执行operate_table.py、get_moods_detail.py两个程序来把动态保存在sqlite数据库文件中
 
 3. 在get_moods_detail.py程序中，我只提取了当时所需要的部分信息，而不是与说说相关的所有信息。有需要其它信息的还要自己去operate_table.py中修改创建数据表的函数以及在get_moods_detail.py程序中修改提取说说信息的函数
+
+4. 程序开始运行后，会产生一个日志文件crawler_log.log，它记录了程序运行期间的一些必要的信息，比如什么时候抓取到了哪个号码的空间，这个空间能不能被访问等
