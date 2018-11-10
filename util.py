@@ -21,13 +21,17 @@ def get_cookie():
 
 cookie = get_cookie()
 
-headers = {'host': 'h5.qzone.qq.com',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            'Accept-Language': 'zh,zh-CN;q=0.8,en-US;q=0.5,en;q=0.3',
-            'Accept-Encoding': 'gzip, deflate, br',
-            'Cookie': cookie,
-            'connection': 'keep-alive'}
+headers = {
+    'accept': '*/*',
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36',
+    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'accept-language': 'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6',
+    'accept-encoding': 'gzip, deflate, br',
+    'cache-control': 'no-cache',
+    'pragma': 'no-cache',
+    'cookie': cookie,
+    'connection': 'keep-alive'
+}
 
 def get_g_tk():
     ''' make g_tk value'''
@@ -49,9 +53,11 @@ g_tk = get_g_tk()
 def get_qzonetoken(qqnum):
     '''获取qzonetoken，它位于空间首页的源代码中'''
     index_url = "https://user.qzone.qq.com/%s" % qqnum
+    headers['referer'] = 'https://qzs.qq.com/qzone/v5/loginsucc.html?para=izone'
+    headers['upgrade-insecure-requests'] = '1'
     res = requests.get(index_url, headers=headers)
     src = res.text
-    search_res = re.search(r'g_qzonetoken.*"(.*)";}', src, re.S)
+    search_res = re.search(r'g_qzonetoken.*return\s*"(.*)";}', src, re.S)
     return search_res.group(1) if search_res else ''
 
 
@@ -83,11 +89,11 @@ def parse_friends_url():
        self cookie
     '''
 
-    cookie = headers['Cookie']
+    cookie = headers['cookie']
     qq_start = cookie.find('uin=o')
     qq_end = cookie.find(';', qq_start)
     qqnumber = cookie[qq_start+5 : qq_end]
-    if qqnumber[0] == 0:
+    if qqnumber[0] == '0':
         qqnumber = qqnumber[1:]
     # 先获取qzonetoken
     qzonetoken = get_qzonetoken(qqnumber)
