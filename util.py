@@ -38,7 +38,13 @@ def get_g_tk():
 
     pskey_start = cookie.find('p_skey=')
     pskey_end = cookie.find(';', pskey_start)
-    p_skey = cookie[pskey_start+7: pskey_end]
+
+    # 有时 p_skey 会出现在 cookie 的最后，此时 pskey_end 会返回-1
+    # 应该直接取到结束
+    if pskey_end == -1:
+        p_skey = cookie[pskey_start+7:]
+    else:
+        p_skey = cookie[pskey_start+7: pskey_end]
 
     h = 5381
 
