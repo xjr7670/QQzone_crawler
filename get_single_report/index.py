@@ -13,12 +13,12 @@ import sqlite3
 import os
 
 import pandas as pd
-from get_single_report.util_index import make_time
-from get_single_report.util_index import make_dict
-from get_single_report.util_index import make_date
+from util_index import make_time
+from util_index import make_dict
+from util_index import make_date
 
 from sqlalchemy import create_engine
-from get_single_report.get_word import get_wordcloud
+from get_word import get_wordcloud
 from flask import Flask
 from flask import jsonify
 from flask import render_template
