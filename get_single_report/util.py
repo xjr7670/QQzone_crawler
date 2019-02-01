@@ -23,5 +23,8 @@ def make_dict(pd_series):
 
 # 根据传入的UTS时间戳返回年、月、日
 def make_date(utstime):
-    res = time.gmtime(utstime)
-    return (res.tm_year, res.tm_mon, res.tm_mday)
+    try:
+        res = time.gmtime(utstime)
+        return res.tm_year, res.tm_mon, res.tm_mday
+    except BaseException:
+        return 0000, 00, 00

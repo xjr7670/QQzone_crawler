@@ -13,11 +13,12 @@ import sqlite3
 import os
 
 import pandas as pd
-from util import make_time
-from util import make_dict
-from util import make_date
+from util_index import make_time
+from util_index import make_dict
+from util_index import make_date
 
 from sqlalchemy import create_engine
+from get_word import get_wordcloud
 from flask import Flask
 from flask import jsonify
 from flask import render_template
@@ -25,20 +26,21 @@ from flask import render_template
 app = Flask(__name__)
 engine = create_engine('sqlite:///../moods.sqlite')
 
+
 @app.route('/')
 def hello():
     return "Welcome!"
 
+
 @app.route('/qqnum=<qqnum>')
-def index(qqnum = None):
-    
+def index(qqnum=None):
     # 根据QQ号码读取数据记录
     sql = 'SELECT * FROM moods WHERE qq = ' + str(qqnum)
-    df = pd.read_sql_query(sql, engine) 
-    
+    df = pd.read_sql_query(sql, engine)
+
     # 用字典来保存各项统计数字
     total_info = dict()
-    
+
     # 保存QQ号
     total_info['qqnum'] = qqnum
 
@@ -65,11 +67,11 @@ def index(qqnum = None):
     last_mood = df.ctime.max()
     total_info['first_mood'] = make_date(first_mood)
     total_info['last_mood'] = make_date(last_mood)
-
+    total_info['wordcloud_total'] = get_wordcloud(qqnum=qqnum)
 
     return render_template('index.html', total=total_info)
 
 
 if __name__ == "__main__":
-    app.debug = True
-    app.run(host='0.0.0.0')
+    app.debug = False
+    app.run(host='0.0.0.0', port=7766)
