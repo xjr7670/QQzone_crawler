@@ -13,7 +13,6 @@ class wc:
         self.img = plt.imread(img_file)
         self.wc = WordCloud(font_path=font_file, background_color='white', max_words=100, mask=self.img,
                             max_font_size=80)
-        ###直接在这里进行猜###
         # font_path指的是字体文件路径，因为wordcloud自带的字体不支持中文所以我们要指定一个字体文件，否者输出的图片全是框框
         # background_color 默认是黑色　我设置成白色
         # max_words最大显示的词数
@@ -50,7 +49,7 @@ def statistic_top_word(word_list):
     result = dict(Counter(word_list))
     # sorted对可迭代对象进行排序
     # items()方法将字典的元素转化为了元组，而这里key参数对应的lambda表达式的意思则是选取元组中的第二个元素作为比较参数
-    # 排序厚的结果是一个列表，列表中的每个元素是一个将原字典中的键值对转化为的元祖
+    # 排序后的结果是一个列表，列表中的每个元素是一个将原字典中的键值对转化为的元祖
     sortlist = sorted(result.items(), key=lambda item: item[1], reverse=True)
     return sortlist
 
@@ -74,7 +73,7 @@ def wordlist(qqnum):
                         continue
                     else:
                         if str(result[0]) in sum_list.keys():
-                            sum_list[str(result[0])] = str(int(result[1]) + int(sum_list[str(result[0])]))
+                            sum_list[str(result[0])] = str(int(result[1]) + int(sum_/usr/share/fonts[str(result[0])]))
                         else:
                             sum_list[str(result[0])] = str(result[1])
         for key_sum in sum_list.keys():
@@ -85,5 +84,6 @@ def wordlist(qqnum):
 
 
 def get_wordcloud(qqnum):
+    # 这里需要注意的是'C:\\Windows\\Fonts\\simfang.ttf'这个为字体文件，本路径为Windows下。如果为Linux系统请在/usr/share/fonts目录下选择自己想要的字体
     mywc = wc(wordlist(qqnum), 'mask.jpg', 'C:\\Windows\\Fonts\\simfang.ttf', qqnum)
     return mywc.show_wc()
