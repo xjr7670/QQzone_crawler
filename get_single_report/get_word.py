@@ -73,7 +73,7 @@ def wordlist(qqnum):
                         continue
                     else:
                         if str(result[0]) in sum_list.keys():
-                            sum_list[str(result[0])] = str(int(result[1]) + int(sum_/usr/share/fonts[str(result[0])]))
+                            sum_list[str(result[0])] = str(int(result[1]) + int(sum_list[str(result[0])]))
                         else:
                             sum_list[str(result[0])] = str(result[1])
         for key_sum in sum_list.keys():
