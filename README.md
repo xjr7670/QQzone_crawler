@@ -43,6 +43,8 @@ python3 operate_table.py drop_table
 
 **get_single_report**：这个是个Web程序，用于在浏览器中查看指定好友说说的简单报告。也需要单独执行，并且必须要在执行完get_moods_details.py文件以生成moods.sqlite数据库文件，这个web程序才可以正确执行。直接执行本文件夹中的index.py即可。需要先安装flask、pandas、sqlalchemy这3个库。执行index.py后，在浏览器中输入 http://localhost:5000/qqnum=QQ号码 就可以查看到结果了
 
+**get_word.py**：用来生成词云，背景图为mask.jpg，为QQ空间的五角星。ttf文件路径请根据自己系统修改！！！
+
 ## 注意事项
 
 1. **获取QQ好友信息是间接获取的。需要先在QQ空间中将自己空间的访问权限先设置为仅QQ好友可访问。然后程序才能够正常运行**
