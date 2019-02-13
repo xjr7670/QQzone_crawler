@@ -13,9 +13,9 @@ import sqlite3
 import os
 
 import pandas as pd
-from util_index import make_time
-from util_index import make_dict
-from util_index import make_date
+from util import make_time
+from util import make_dict
+from util import make_date
 
 from sqlalchemy import create_engine
 from get_word import get_wordcloud
