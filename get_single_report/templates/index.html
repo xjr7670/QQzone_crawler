@@ -6,7 +6,7 @@
         <script src="{{ url_for('static', filename='echarts.common.min.js') }}"></script>
     </head>
     <body style="width: 800px">
-        你的QQ号码是：<strong>{{ total["qqnum"] }}</strong><br />
+        你查询的QQ号码是：<strong>{{ total["qqnum"] }}</strong><br />
         QQ动态总数为：<strong>{{ total["mood_count"] }}</strong><br />
         其中带有图片的有：<strong>{{ total["image_count"] }}</strong>条</br>
         <br />
@@ -67,6 +67,7 @@
             show_pic(year_data, 'year');
             show_pic(wday_data, 'wday');
         </script>
+        <h3>动态关键词词云：</h3>
         <img src={{ total["wordcloud_total"] }}>
     </body>
 </html>

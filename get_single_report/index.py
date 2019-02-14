@@ -1,3 +1,4 @@
+#-*- coding:utf-8 -*-
 '''
 1. 从数据库中读取数据
 2. 把数据读入到Pandas中的DataFrame中

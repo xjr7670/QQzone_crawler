@@ -18,7 +18,7 @@ class wc:
         # max_words最大显示的词数
         # mask 背景图片
         # max_font_size　最大字体字号
-        print(str(self.text))
+        # print(str(self.text))
         self.word_cloud = self.wc.generate(str(self.text))
         self.qqnum = qqnum
 

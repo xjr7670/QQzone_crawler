@@ -39,11 +39,11 @@ python3 operate_table.py create_table
 python3 operate_table.py drop_table
 ```
 
-**get_moods_detail.py**：程序在执行完get_moods.py中的功能之后，会把包含有每个好友的说说文件保存到本地。而这个程序就是用于把说说信息从这些文件里面提取出来，放到sqlite数据库里面去的。这个程序需要单独执行。执行完后在当前目录下会生成moods.sqlite数据库文件。本程序需要在成功执行operate_table.py程序创建数据表后执行。
+**get_moods_detail.py**：程序在执行完 get_moods.py 中的功能之后，会把包含有每个好友的说说文件保存到本地。而这个程序就是用于把说说信息从这些文件里面提取出来，放到sqlite数据库里面去的。这个程序需要单独执行。执行完后在当前目录下会生成 moods.sqlite 数据库文件。**本程序需要在成功执行 operate_table.py 程序创建数据表后执行**。
 
-**get_single_report**：这个是个Web程序，用于在浏览器中查看指定好友说说的简单报告。也需要单独执行，并且必须要在执行完get_moods_details.py文件以生成moods.sqlite数据库文件，这个web程序才可以正确执行。直接执行本文件夹中的index.py即可。需要先安装flask、pandas、sqlalchemy这3个库。执行index.py后，在浏览器中输入 http://localhost:5000/qqnum=QQ号码 就可以查看到结果了
+**get_single_report**：这个是个 Web 程序，用于在浏览器中查看指定好友说说的简单报告。也需要单独执行，并且必须要在执行完 get_moods_details.py 文件以生成 moods.sqlite 数据库文件，这个 web 程序才可以正确执行。直接执行本文件夹中的index.py即可。需要先安装 flask、pandas、sqlalchemy、jieba、wordcloud 这几个库。**执行 `python3 index.py` 后**，在浏览器中输入 http://localhost:5000/qqnum=QQ号码 就可以查看到结果了
 
-**get_word.py**：用来生成词云，背景图为mask.jpg，为QQ空间的五角星。ttf文件路径请根据自己系统修改！！！
+**get_word.py**：用来生成词云，背景图为 mask.jpg，为QQ空间的五角星。ttf文件路径请根据自己系统修改。**本程序不需要单独执行。**
 
 ## 注意事项
 
